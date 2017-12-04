@@ -4,9 +4,7 @@
 #include <regex>
 #include <assert.h>
 
-
 using namespace std;
-
 
 regex r_letter("[a-zA-Z]+");
 regex r_digit("[0-9]+");
@@ -16,7 +14,6 @@ regex r_blank("\s");
 regex r_op("(@|=|/=|>|:=|<|>=|<=|\\+|\\*|/|-)"); // operators
 regex r_sep("(\\(|\\)|,|;|:|%%|\\{|\\}|\\[|\\])"); // separator
 regex r_key("(boolean|else|false|fi|floating|if|integer|read|return|true|while|write)"); // keyword
-
 
 typedef int fsm_state;
 typedef char fsm_input;
@@ -30,7 +27,8 @@ void lexer();
 int main()
 {
 	lexer();
-
+	//parser();
+	
 	return getchar();
 }
 
@@ -81,8 +79,6 @@ void lexer() {
 			keyword.clear();
 
 		}
-		//=======================================================
-
 
 		//================================================================
 		//Fsm for Identifier
@@ -107,18 +103,8 @@ void lexer() {
 					cout << "Identifier\t" << fsm_string << endl;
 					fsm_string.clear();
 				}
-				else if (recognize(fsm_string) == false)
-				{
-					//fsm_string.clear();
-
-				}
 			}
-			//fsm_string.clear();
-
 		}
-
-		//=======================================================
-
 
 		//================================================================
 		//Fsm for integers and reals
@@ -141,7 +127,6 @@ void lexer() {
 		}
 		else if (regex_match(temp_OneChar_String, r_digit) == false && fsm_string.empty() == false)
 		{
-
 			bool decNum = false;
 			for (std::string::iterator it = fsm_string.begin(); it != fsm_string.end(); ++it)
 			{
@@ -160,7 +145,6 @@ void lexer() {
 					yesDec = false;
 					fsm_string.clear();
 				}
-
 			}
 			else if (decNum == false)
 			{
@@ -171,11 +155,7 @@ void lexer() {
 					cout << "Integer\t\t" << fsm_string << endl;
 					fsm_string.clear();
 				}
-
 			}
-
-
-
 		}
 
 		//=======================================================
@@ -243,8 +223,6 @@ void lexer() {
 
 		}
 
-
-
 		//=========================================================
 		//prints double %%
 		if (character == '%' && seperators.empty() == true)
@@ -264,7 +242,7 @@ void lexer() {
 
 	}
 
-	cout << "\nCount of Tokens: " << count << endl;
+	cout << "\nToken Count: " << count << endl;
 
 	inFile.close();
 };
@@ -292,19 +270,14 @@ fsm_state get_start_state(void)
 
 fsm_state move(fsm_state state, fsm_input input)
 {
-
 	string temp_string;
 	temp_string = input;
-
-
 
 	// our alphabet includes only 'a' and 'b'
 	if (temp_string != "#" && temp_string != "." && regex_match(temp_string, r_letter) == true && regex_match(temp_string, r_digit) == true)
 	{
 		assert(1);
 	}
-
-
 
 	switch (state)
 	{
@@ -395,13 +368,15 @@ bool recognize(string str)
 	while (i != str.end())
 	{
 		state = move(state, *i);
-		++i;
+		i++;
 	}
 
 	if (is_final_state(state))
 	{
 		return true;
 	}
-	else { return false; }
-
+	else
+	{
+		return false;
+	}
 };
