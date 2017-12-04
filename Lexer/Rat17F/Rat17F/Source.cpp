@@ -448,11 +448,15 @@ int main()
 {
 	lexer();
 	//parser();
+	ifstream in;
+	in.open("test.txt");
 
-	file = fopen("program.txt", "r");
-	if (file == nullptr) { perror("Error opening file."); }
+	if (!in) 
+	{ 
+		cerr << "Error opening file."; 
+	}
 	do {
-		nextChar = getc(file);
+		in.get(nextChar);
 		if (ispunct(nextChar) && nextChar != '"') {
 			stateOnePuncDFA(nextChar);
 		}
@@ -464,7 +468,7 @@ int main()
 			stateOneRegex(nextChar);
 		}
 
-	} while (nextChar != EOF);
+	} while (!eof);
 
 	//cout << "(Tok: id= " << eof << " line = " << lineCount << " str= \"\")" << endl;
 	input.push_back(Symbol(eof, "$", "", true));
@@ -1320,4 +1324,3 @@ int getCode(string lex) {
 		return ERROR;
 	}
 }
-
