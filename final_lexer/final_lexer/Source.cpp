@@ -13,15 +13,13 @@ regex r_digit("[0-9]+");
 
 regex r_blank("\s");
 
-regex r_op("(@|=|/=|>|:=|<|>=|<=|\\+|\\*|/|-)"); // operator
+regex r_op("(@|=|/=|>|:=|<|>=|<=|\\+|\\*|/|-)"); // operators
 regex r_sep("(\\(|\\)|,|;|:|%%|\\{|\\}|\\[|\\])"); // separator
 regex r_key("(boolean|else|false|fi|floating|if|integer|read|return|true|while|write)"); // keyword
 
 
 typedef int fsm_state;
 typedef char fsm_input;
-
-
 
 bool recognize(string str);
 bool is_final_state(fsm_state state);
@@ -33,57 +31,54 @@ int main()
 {
 	lexer();
 
-
 	return getchar();
 }
 
 
 void lexer() {
 
-	fstream fileStream;
-	fileStream.open("test.txt");
+	fstream inFile;
+	inFile.open("test.txt");
 
-	if (fileStream.is_open())
-		cout << "open\n";
-	else
-		cout << "unable\n";
+	if(!inFile)
+		cerr << "File did not open or does not exist.";
 
-	cout << "token\t\tlexeme\n";
-	cout << "------\t\t------\n";
+	cout << "Tokens\t";
+	cout << "\tLexeme\n";
+	cout << "----------------------\n";
 
-	//for finding keywords, operators, separators.
-	string kWord;
-	string ops;
-	string seps;
+	//intifinding keywords, operator, separators.
+	string keyword;
+	string operators;
+	string seperators;
 	string fsm_string;
 
-	//Using count to double check correct amount of separators, operators, keywords, integers, floats, Indentifiers
+	//Using count to double check correct amount of separators, operator, keywords, integers, floats, Indentifiers
 	int count = 0;
 
-
 	//Using c to get character by character from file
-	char c;
+	char character;
 	bool yesDec = false;
 
-	while (fileStream.get(c))
+	while (inFile.get(character))
 	{
 
 		//converting to string for regex_match
-		string temp_OneChar_String(1, c);
+		string temp_OneChar_String(1, character);
 
 		if (regex_match(temp_OneChar_String, r_letter)) {
 			//appending chars to string to make word
-			kWord.append(temp_OneChar_String);
+			keyword.append(temp_OneChar_String);
 		}
 		else if (regex_match(temp_OneChar_String, r_letter) == false) {
 			//if it isn't a letter then end of word
-			//checking to see if kword is a keyword
-			if (regex_match(kWord, r_key)) {
+			//checking to see if keyword is a keyword
+			if (regex_match(keyword, r_key)) {
 				count++;
-				cout << "Keyword\t\t" << kWord << '\n';
+				cout << "Keyword\t\t" << keyword << '\n';
 				fsm_string.clear();
 			}
-			kWord.clear();
+			keyword.clear();
 
 		}
 		//=======================================================
@@ -184,64 +179,64 @@ void lexer() {
 		}
 
 		//=======================================================
-		//checking the colon to see if it's apart of separator or operator
-		if (c == ':'  && seps.empty() == true) {
-			seps.append(temp_OneChar_String);
+		//check colon to see if it's apart of separator or operators
+		if (character == ':'  && seperators.empty() == true) {
+			seperators.append(temp_OneChar_String);
 			continue;
 
 		}
-		else if (c == '=' && seps.empty() == false) {
-			seps.append(temp_OneChar_String);
-			ops = seps;
+		else if (character == '=' && seperators.empty() == false) {
+			seperators.append(temp_OneChar_String);
+			operators = seperators;
 			count++;
-			cout << "Operator\t" << ops << '\n';
-			ops.clear();
-			seps.clear();
+			cout << "operators\t" << operators << '\n';
+			operators.clear();
+			seperators.clear();
 			continue;
 		}
-		else if (seps.length() == 1 && (c != '=' && c != '%') && regex_match(seps, r_op) == false)
+		else if (seperators.length() == 1 && (character != '=' && character != '%') && regex_match(seperators, r_op) == false)
 		{	//outputting single colon
 			count++;
-			cout << "Separator\t" << seps << endl;
-			seps.clear();
-			ops.clear();
+			cout << "Separator\t" << seperators << endl;
+			seperators.clear();
+			operators.clear();
 			continue;
 		}
 		//======================================================
-		//prints double char operators
-		if ((c == '<' || c == '>' || c == '/') && ops.empty() == true)
+		//prints double char operatorss
+		if ((character == '<' || character == '>' || character == '/') && operators.empty() == true)
 		{
-			ops.append(temp_OneChar_String);
+			operators.append(temp_OneChar_String);
 			continue;
 		}
-		else if (c == '=' && ops.empty() == false)
+		else if (character == '=' && operators.empty() == false)
 		{
 			count++;
-			ops.append(temp_OneChar_String);
-			cout << "Operator\t" << ops << endl;
-			ops.clear();
+			operators.append(temp_OneChar_String);
+			cout << "operators\t" << operators << endl;
+			operators.clear();
 			continue;
 		}
 		//=======================================================
-		//print out single operators
-		if ((c != ':') && (regex_match(ops, r_op)) && (ops.length() == 1))
+		//print out single operatorss
+		if ((character != ':') && (regex_match(operators, r_op)) && (operators.length() == 1))
 		{
 			count++;
-			cout << "Operator\t" << ops << endl;
-			ops.clear();
+			cout << "operators\t" << operators << endl;
+			operators.clear();
 			continue;
 		}
 		else if (regex_match(temp_OneChar_String, r_op))
 		{
 			count++;
-			cout << "Operator\t" << temp_OneChar_String << " " << ops << endl;
-			ops.clear();
+			cout << "operators\t" << temp_OneChar_String << " " << operators << endl;
+			operators.clear();
 			continue;
 		}
 
 		//=======================================================
 		//prints out all other separators except :
-		if (c != ':' && regex_match(temp_OneChar_String, r_sep))
+		if (character != ':' && regex_match(temp_OneChar_String, r_sep))
 		{
 			count++;
 			cout << "Separator\t" << temp_OneChar_String << endl;
@@ -252,17 +247,17 @@ void lexer() {
 
 		//=========================================================
 		//prints double %%
-		if (c == '%' && seps.empty() == true)
+		if (character == '%' && seperators.empty() == true)
 		{
-			seps.append(temp_OneChar_String);
+			seperators.append(temp_OneChar_String);
 			continue;
 		}
-		else if (c == '%' && seps.empty() == false)
+		else if (character == '%' && seperators.empty() == false)
 		{
 			count++;
-			seps.append(temp_OneChar_String);
-			cout << "Separator\t" << seps << endl;
-			seps.clear();
+			seperators.append(temp_OneChar_String);
+			cout << "Separator\t" << seperators << endl;
+			seperators.clear();
 			continue;
 		}
 
@@ -271,7 +266,7 @@ void lexer() {
 
 	cout << "\nCount of Tokens: " << count << endl;
 
-	fileStream.close();
+	inFile.close();
 };
 
 //================================================================
