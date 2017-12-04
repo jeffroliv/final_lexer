@@ -449,15 +449,10 @@ int main()
 {
 	lexer();
 	//parser();
-	ifstream in;
-	in.open("test.txt");
-
-	if (!in) 
-	{ 
-		cerr << "Error opening file."; 
-	}
+	file = fopen("test.txt", "r");
+	if (file == nullptr) { perror("Error opening file."); }
 	do {
-		in.get(nextChar);
+		nextChar = getc(file);
 		if (ispunct(nextChar) && nextChar != '"') {
 			stateOnePuncDFA(nextChar);
 		}
@@ -469,7 +464,7 @@ int main()
 			stateOneRegex(nextChar);
 		}
 
-	} while (!eof);
+	} while (nextChar != EOF);
 
 	//cout << "(Tok: id= " << eof << " line = " << lineCount << " str= \"\")" << endl;
 	input.push_back(Symbol(eof, "$", "", true));
