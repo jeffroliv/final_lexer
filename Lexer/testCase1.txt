@@ -1,0 +1,88 @@
+This test case has should have no errors and the output shows
+that the lexer succeeds.
+12 lines of code.
+==============================================================
+@ convert  (fahr : integer)
+{
+           return 5*(fahr -32.97)/9;
+}
+
+%%
+     integer   low, high, step#xy;
+
+     read(low, high, step#xy );
+     while (low < high)  
+         {  write  (low);
+             write (convert [low]);
+             low := low + step#xy;
+         } 
+
+===================output=========================================
+open
+token           lexeme
+------          ------
+Operator        @
+Identifier      convert
+Separator       (
+Identifier      fahr
+Separator       :
+Keyword         integer
+Separator       )
+Separator       {
+Keyword         return
+Integer         5
+Operator        *
+Separator       (
+Identifier      fahr
+Operator        -
+Float           32.97
+Separator       )
+Operator        /
+Integer         9
+Separator       ;
+Separator       }
+Separator       %%
+Keyword         integer
+Identifier      low
+Separator       ,
+Identifier      high
+Separator       ,
+Identifier      step#xy
+Separator       ;
+Keyword         read
+Separator       (
+Identifier      low
+Separator       ,
+Identifier      high
+Separator       ,
+Identifier      step#xy
+Separator       )
+Separator       ;
+Keyword         while
+Separator       (
+Identifier      low
+Operator        <
+Identifier      high
+Separator       )
+Separator       {
+Keyword         write
+Separator       (
+Identifier      low
+Separator       )
+Separator       ;
+Keyword         write
+Separator       (
+Identifier      convert
+Separator       [
+Identifier      low
+Separator       ]
+Separator       )
+Separator       ;
+Identifier      low
+Operator        :=
+Identifier      low
+Operator        +
+Identifier      step#xy
+Separator       ;
+Separator       }
+

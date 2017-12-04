@@ -1,0 +1,5 @@
+﻿  Source.cpp
+c:\users\jeffr\desktop\lexer\rat17f\rat17f\source.cpp(12): warning C4129: 's': unrecognized character escape sequence
+c:\users\jeffr\desktop\lexer\rat17f\rat17f\source.cpp(370): warning C4715: 'move': not all control paths return a value
+  Rat17F.vcxproj -> C:\Users\Jeffr\Desktop\Lexer\Rat17F\Debug\Rat17F.exe
+  Rat17F.vcxproj -> C:\Users\Jeffr\Desktop\Lexer\Rat17F\Debug\Rat17F.pdb (Partial PDB)

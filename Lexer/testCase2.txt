@@ -1,0 +1,250 @@
+54 lines of code
+===============================
+while (fahr#x## > upper) a:=23.00.
+@ convert  (fahr : integer)
+{
+           return 5*(fahr -32.97)/9;
+}
+
+%%
+     integer   low, high, step#xy;
+
+     read(low, high, step#xy );
+     while (low < high)  
+         {  write  (low);
+             write (convert [low]);
+             low := low + step#xy;
+         } 
+
+	float  ma#x := 23.33, mi#n := 14.232;
+
+
+while(x>y)
+{
+	ma#x = x;
+	mi#n = y;
+	
+}
+
+while (cels#f#f# > lower) a:= 4433
+@ convert  (fahr : float)
+{
+           return 5*(fahr -33)/9.93;
+}
+
+%%
+     float   low, high, step#xy;
+
+     read(low, high, step#xy );
+     while (low < high)  
+         {  write  (low);
+             write (convert [low]);
+             low := low + step#xy;
+         } 
+
+	float  ma#x := 23.33, mi#n := 14.232;
+
+
+while(ma#x>mi#n)
+{
+	
+	x = ma#x
+	y = mi#n
+
+	return x;
+	
+}
+===============================output=========================================
+open
+token           lexeme
+------          ------
+Keyword         while
+Separator       (
+Operator        >
+Separator       )
+Operator        :=
+Operator        @
+Separator       (
+Separator       :
+Keyword         integer
+Separator       )
+Separator       {
+Keyword         return
+Integer         5
+Operator        *
+Separator       (
+Integer         fahr
+Operator        -
+Float           32.97
+Separator       )
+Operator        /
+Integer         9
+Separator       ;
+Separator       }
+Separator       %%
+Keyword         integer
+Identifier      low
+Separator       ,
+Identifier      high
+Separator       ,
+Identifier      step#xy
+Separator       ;
+Keyword         read
+Separator       (
+Identifier      low
+Separator       ,
+Identifier      high
+Separator       ,
+Identifier      step#xy
+Separator       )
+Separator       ;
+Keyword         while
+Separator       (
+Identifier      low
+Operator        <
+Identifier      high
+Separator       )
+Separator       {
+Keyword         write
+Separator       (
+Identifier      low
+Separator       )
+Separator       ;
+Keyword         write
+Separator       (
+Identifier      convert
+Separator       [
+Identifier      low
+Separator       ]
+Separator       )
+Separator       ;
+Identifier      low
+Operator        :=
+Identifier      low
+Operator        +
+Identifier      step#xy
+Separator       ;
+Separator       }
+Identifier      float
+Identifier      ma#x
+Operator        :=
+Float           23.33
+Separator       ,
+Identifier      mi#n
+Operator        :=
+Float           14.232
+Separator       ;
+Keyword         while
+Separator       (
+Identifier      x
+Identifier      y
+Operator        >
+Separator       {
+Identifier      ma#x
+Operator        =
+Identifier      x
+Separator       ;
+Identifier      mi#n
+Operator        =
+Identifier      y
+Separator       ;
+Separator       }
+Keyword         while
+Separator       (
+Identifier      cels#f#f#
+Operator        >
+Identifier      lower
+Separator       )
+Identifier      a
+Operator        :=
+Integer         4433
+Operator        @
+Identifier      convert
+Separator       (
+Identifier      fahr
+Separator       :
+Identifier      float
+Separator       )
+Separator       {
+Keyword         return
+Integer         5
+Operator        *
+Separator       (
+Identifier      fahr
+Operator        -
+Integer         33
+Separator       )
+Operator        /
+Float           9.93
+Separator       ;
+Separator       }
+Separator       %%
+Identifier      float
+Identifier      low
+Separator       ,
+Identifier      high
+Separator       ,
+Identifier      step#xy
+Separator       ;
+Keyword         read
+Separator       (
+Identifier      low
+Separator       ,
+Identifier      high
+Separator       ,
+Identifier      step#xy
+Separator       )
+Separator       ;
+Keyword         while
+Separator       (
+Identifier      low
+Operator        <
+Identifier      high
+Separator       )
+Separator       {
+Keyword         write
+Separator       (
+Identifier      low
+Separator       )
+Separator       ;
+Keyword         write
+Separator       (
+Identifier      convert
+Separator       [
+Identifier      low
+Separator       ]
+Separator       )
+Separator       ;
+Identifier      low
+Operator        :=
+Identifier      low
+Operator        +
+Identifier      step#xy
+Separator       ;
+Separator       }
+Identifier      float
+Identifier      ma#x
+Operator        :=
+Float           23.33
+Separator       ,
+Identifier      mi#n
+Operator        :=
+Float           14.232
+Separator       ;
+Keyword         while
+Separator       (
+Identifier      ma#x
+Identifier      mi#n
+Operator        >
+Separator       {
+Identifier      x
+Operator        =
+Identifier      ma#x
+Identifier      y
+Operator        =
+Identifier      mi#n
+Keyword         return
+Identifier      x
+Separator       ;
+Separator       }
+

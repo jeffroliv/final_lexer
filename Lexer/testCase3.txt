@@ -1,0 +1,124 @@
+This test case tests for invalid identifiers and invalid floats, the lexer
+succeeded. 
+25 lines of code.
+=============================================================================
+while (fahr#x## > upper) a:=23.00.
+@ convert  (fahr : integer)
+{
+           return 5*(fahr -32.97)/9;
+}
+
+%%
+     integer   low, high, step#xy;
+
+     read(low, high, step#xy );
+     while (low < high)  
+         {  write  (low);
+             write (convert [low]);
+             low := low + step#xy;
+         } 
+
+	float  ma#x := 23.33, mi#n := 14.232;
+
+
+while(x>y)
+{
+	ma#x = x;
+	mi#n = y;
+	
+}
+==============================================================================
+open
+token           lexeme
+------          ------
+Keyword         while
+Separator       (
+Operator        >
+Separator       )
+Operator        :=
+Operator        @
+Separator       (
+Separator       :
+Keyword         integer
+Separator       )
+Separator       {
+Keyword         return
+Integer         5
+Operator        *
+Separator       (
+Integer         fahr
+Operator        -
+Float           32.97
+Separator       )
+Operator        /
+Integer         9
+Separator       ;
+Separator       }
+Separator       %%
+Keyword         integer
+Identifier      low
+Separator       ,
+Identifier      high
+Separator       ,
+Identifier      step#xy
+Separator       ;
+Keyword         read
+Separator       (
+Identifier      low
+Separator       ,
+Identifier      high
+Separator       ,
+Identifier      step#xy
+Separator       )
+Separator       ;
+Keyword         while
+Separator       (
+Identifier      low
+Operator        <
+Identifier      high
+Separator       )
+Separator       {
+Keyword         write
+Separator       (
+Identifier      low
+Separator       )
+Separator       ;
+Keyword         write
+Separator       (
+Identifier      convert
+Separator       [
+Identifier      low
+Separator       ]
+Separator       )
+Separator       ;
+Identifier      low
+Operator        :=
+Identifier      low
+Operator        +
+Identifier      step#xy
+Separator       ;
+Separator       }
+Identifier      float
+Identifier      ma#x
+Operator        :=
+Float           23.33
+Separator       ,
+Identifier      mi#n
+Operator        :=
+Float           14.232
+Separator       ;
+Keyword         while
+Separator       (
+Identifier      x
+Identifier      y
+Operator        >
+Separator       {
+Identifier      ma#x
+Operator        =
+Identifier      x
+Separator       ;
+Identifier      mi#n
+Operator        =
+Identifier      y
+Separator       ;
+Separator       }

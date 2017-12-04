@@ -1,0 +1,54 @@
+while (fahr#x## > upper) a:=23.00.
+@ convert  (fahr : integer)
+{
+           return 5*(fahr -32.97)/9;
+}
+
+%%
+     integer   low, high, step#xy;
+
+     read(low, high, step#xy );
+     while (low < high)  
+         {  write  (low);
+             write (convert [low]);
+             low := low + step#xy;
+         } 
+
+	float  ma#x := 23.33, mi#n := 14.232;
+
+
+while(x>y)
+{
+	ma#x = x;
+	mi#n = y;
+	
+}
+
+while (cels#f#f# > lower) a:= 4433
+@ convert  (fahr : float)
+{
+           return 5*(fahr -33)/9.93;
+}
+
+%%
+     float   low, high, step#xy;
+
+     read(low, high, step#xy );
+     while (low < high)  
+         {  write  (low);
+             write (convert [low]);
+             low := low + step#xy;
+         } 
+
+	float  ma#x := 23.33, mi#n := 14.232;
+
+
+while(ma#x>mi#n)
+{
+	
+	x = ma#x
+	y = mi#n
+
+	return x;
+	
+}
