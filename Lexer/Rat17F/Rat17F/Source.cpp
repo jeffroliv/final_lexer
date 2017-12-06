@@ -127,7 +127,7 @@ bool recognize(string str);
 bool is_final_state(fsm_state state);
 fsm_state get_start_state(void);
 fsm_state move(fsm_state state, fsm_input input);
-void lexer(SYMBOLTABLE st[]);
+
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -453,46 +453,6 @@ struct SYMBOLTABLE
 
 ////////////////////////////////////////////////////////////////////////////////
 
-int main()
-{
-	SYMBOLTABLE st[1000];
-	lexer(st);
-	//parser();
-	file = fopen("test.txt", "r");
-	if (file == nullptr) { perror("Error opening file."); }
-	do {
-		nextChar = getc(file);
-		if (ispunct(nextChar) && nextChar != '"') {
-			stateOnePuncDFA(nextChar);
-		}
-		else if (isalpha(nextChar)) {
-			stateOneKeyWordDFA(nextChar);
-
-		}
-		else {
-			stateOneRegex(nextChar);
-		}
-
-	} while (nextChar != EOF);
-
-	cout << st[0].ident << endl;
-
-	//cout << "(Tok: id= " << eof << " line = " << lineCount << " str= \"\")" << endl;
-	input.push_back(Symbol(eof, "$", "", true));
-
-	cout << "Starting parse machine...\n";
-
-	vector<Symbol> reversedInput = reverseInput(input);
-
-	Parser * parser = new Parser(reversedInput);
-
-	parser->start();
-
-
-	return getchar();
-}
-
-
 void lexer(SYMBOLTABLE st[]) {
 
 	fstream inFile;
@@ -708,6 +668,50 @@ void lexer(SYMBOLTABLE st[]) {
 
 	inFile.close();
 };
+
+////////////////////////////////////////////////////////////////////////////////
+
+int main()
+{
+	SYMBOLTABLE st[1000];
+	lexer(st);
+	//parser();
+	file = fopen("test.txt", "r");
+	if (file == nullptr) { perror("Error opening file."); }
+	do {
+		nextChar = getc(file);
+		if (ispunct(nextChar) && nextChar != '"') {
+			stateOnePuncDFA(nextChar);
+		}
+		else if (isalpha(nextChar)) {
+			stateOneKeyWordDFA(nextChar);
+
+		}
+		else {
+			stateOneRegex(nextChar);
+		}
+
+	} while (nextChar != EOF);
+
+	cout << st[0].ident << endl;
+
+	//cout << "(Tok: id= " << eof << " line = " << lineCount << " str= \"\")" << endl;
+	input.push_back(Symbol(eof, "$", "", true));
+
+	cout << "Starting parse machine...\n";
+
+	vector<Symbol> reversedInput = reverseInput(input);
+
+	Parser * parser = new Parser(reversedInput);
+
+	parser->start();
+
+
+	return getchar();
+}
+
+
+
 
 //================================================================
 bool is_final_state(fsm_state state)
