@@ -37,6 +37,8 @@ regex r_key("(boolean|else|false|fi|floating|if|integer|read|return|true|while|w
 #define EPS 1000
 
 FILE * file;
+int stcount = 0;
+int mem_loc = 10000;
 char nextChar;
 char lexeme[100];
 char lexemeLength = 0;
@@ -446,7 +448,7 @@ public:
 
 struct SYMBOLTABLE
 {
-	int mem_loc = 10000;
+	int st_memloc;
 	string type;
 	string ident;
 };
@@ -473,7 +475,7 @@ void lexer(SYMBOLTABLE st[]) {
 
 	//Using count to double check correct amount of separators, operator, keywords, integers, floats, Indentifiers
 	int count = 0;
-	int stcount = 0;
+	int tcount = 0;
 
 	//Using c to get character by character from file
 	char character;
@@ -522,8 +524,10 @@ void lexer(SYMBOLTABLE st[]) {
 				{
 					count++;
 					cout << "Identifier\t" << fsm_string << endl;
-					st[stcount].mem_loc++;
-					st[stcount].ident = fsm_string;
+					mem_loc++;
+					st[tcount].st_memloc = mem_loc;
+					st[tcount].ident = fsm_string;
+					tcount++;
 					stcount++;
 					fsm_string.clear();
 				}
@@ -693,7 +697,15 @@ int main()
 
 	} while (nextChar != EOF);
 
-	cout << st[0].ident << endl;
+	cout << endl << endl;
+	cout << "Identifier\tMemory Location\t\tType" << endl;
+	cout << "--------------------------------------------------" << endl;
+	
+	for (int i = 0; i < stcount; i++)
+	{
+		cout << st[i].ident << "\t\t" << st[i].st_memloc << endl;
+	}
+	cout << endl << endl;
 
 	//cout << "(Tok: id= " << eof << " line = " << lineCount << " str= \"\")" << endl;
 	input.push_back(Symbol(eof, "$", "", true));
