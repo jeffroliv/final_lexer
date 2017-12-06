@@ -36,7 +36,6 @@ regex r_key("(boolean|else|false|fi|floating|if|integer|read|return|true|while|w
 #define OPMUL 14 // can lead to "aster | slash | caret"
 #define EPS 1000
 
-
 FILE * file;
 char nextChar;
 char lexeme[100];
@@ -128,7 +127,7 @@ bool recognize(string str);
 bool is_final_state(fsm_state state);
 fsm_state get_start_state(void);
 fsm_state move(fsm_state state, fsm_input input);
-void lexer();
+void lexer(SYMBOLTABLE st[]);
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -447,15 +446,17 @@ public:
 
 struct SYMBOLTABLE
 {
-	int ident;
-	int mem_loc;
+	int mem_loc = 10000;
 	string type;
+	string ident;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
+
 int main()
 {
-	lexer();
+	SYMBOLTABLE st[1000];
+	lexer(st);
 	//parser();
 	file = fopen("test.txt", "r");
 	if (file == nullptr) { perror("Error opening file."); }
@@ -474,6 +475,8 @@ int main()
 
 	} while (nextChar != EOF);
 
+	cout << st[0].ident << endl;
+
 	//cout << "(Tok: id= " << eof << " line = " << lineCount << " str= \"\")" << endl;
 	input.push_back(Symbol(eof, "$", "", true));
 
@@ -490,9 +493,8 @@ int main()
 }
 
 
-void lexer() {
+void lexer(SYMBOLTABLE st[]) {
 
-	SYMBOLTABLE ST[1000];
 	fstream inFile;
 	inFile.open("test.txt");
 
@@ -511,6 +513,7 @@ void lexer() {
 
 	//Using count to double check correct amount of separators, operator, keywords, integers, floats, Indentifiers
 	int count = 0;
+	int stcount = 0;
 
 	//Using c to get character by character from file
 	char character;
@@ -559,6 +562,9 @@ void lexer() {
 				{
 					count++;
 					cout << "Identifier\t" << fsm_string << endl;
+					st[stcount].mem_loc++;
+					st[stcount].ident = fsm_string;
+					stcount++;
 					fsm_string.clear();
 				}
 			}
@@ -1163,7 +1169,7 @@ void terminateStateRegex() {
 }
 int getRegexCode(string lex) {
 	regex id("['_'*|[a-zA-Z0-9]*");
-	regex integer("(-|\\+)?[0-9]+");
+	regex integer("[0-9]+");
 	regex flt("((-|\\+)?[0-9]+\\.)?[0-9]+");
 	regex string("\".*\"");
 
