@@ -524,12 +524,28 @@ void lexer(SYMBOLTABLE st[]) {
 				{
 					count++;
 					cout << "Identifier\t" << fsm_string << endl;
-					mem_loc++;
+					for (int i = 0; i < tcount + 1; i++)
+					{
+						if (fsm_string == " "  || fsm_string == st[i - 1].ident )
+						{
+							continue;
+						}
+						else
+						{
+							mem_loc++;
+							st[tcount].st_memloc = mem_loc;
+							st[tcount].ident = fsm_string;
+							tcount++;
+							stcount++;
+							fsm_string.clear();
+						}
+					}
+					/*mem_loc++;
 					st[tcount].st_memloc = mem_loc;
 					st[tcount].ident = fsm_string;
 					tcount++;
 					stcount++;
-					fsm_string.clear();
+					fsm_string.clear();*/
 				}
 			}
 		}
