@@ -445,6 +445,14 @@ public:
 
 ////////////////////////////////////////////////////////////////////////////////
 
+struct SYMBOLTABLE
+{
+	int ident;
+	int mem_loc;
+	string type;
+};
+
+////////////////////////////////////////////////////////////////////////////////
 int main()
 {
 	lexer();
@@ -484,6 +492,7 @@ int main()
 
 void lexer() {
 
+	SYMBOLTABLE ST[1000];
 	fstream inFile;
 	inFile.open("test.txt");
 
