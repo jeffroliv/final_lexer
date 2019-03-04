@@ -1,2 +1,3 @@
 # final_lexer
-Alex Athas, Jeffrey Liv
+
+Authors: Alex Athas, Jeffrey Liv
